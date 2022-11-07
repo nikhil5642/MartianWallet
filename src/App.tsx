@@ -16,7 +16,7 @@ export default (p: InitParams) => {
     <SafeAreaProvider>
       <NavigatorView
         p={{
-          route: Routes.LoginScreen,
+          route: Routes.Home,
           params: {},
         }}
       />

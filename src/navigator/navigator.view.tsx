@@ -1,12 +1,7 @@
 import React, {FC} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  CardStyleInterpolators,
-  createStackNavigator,
-  HeaderStyleInterpolators,
-  TransitionSpecs,
-} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import {navigationRef} from '../helper/navigation-helper';
 

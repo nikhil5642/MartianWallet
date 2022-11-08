@@ -1,4 +1,3 @@
-import {PortFolioItem} from './home-screen.interface';
 import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   container: {

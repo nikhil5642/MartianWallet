@@ -1,7 +1,11 @@
 import React, {FC} from 'react';
 import {Image, Pressable, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useSelector} from 'react-redux';
 import {Props} from '../../core/component';
+import {ReduxInterface} from '../../core/reduxStore';
+import {PushScreenAction} from '../../helper/navigation-helper';
+import {Routes} from '../../navigator/navigator.interface';
 import {HomeScreenParams, PortFolioItem} from './home-screen.interface';
 import {styles} from './home-screen.styles';
 
@@ -21,19 +25,27 @@ export const HomeScreenView: FC<Props<HomeScreenParams>> = ({}) => {
 };
 
 const Header = () => {
+  const chainSelection = useSelector(
+    (state: ReduxInterface) => state.chains.selection,
+  );
   return (
     <View style={styles.headerContainer}>
-      <View style={styles.chainSelectorContainer}>
+      <Pressable
+        style={styles.chainSelectorContainer}
+        onPress={() =>
+          PushScreenAction({route: Routes.ChainSelectorDialog, params: {}})
+        }
+      >
         <Image
           style={styles.chainLogo}
           source={require('../../assets/aptos_logo_small.png')}
         />
-        <Text style={styles.chainText}>Aptos</Text>
+        <Text style={styles.chainText}>{chainSelection.name}</Text>
         <Image
           style={styles.chainDropdown}
           source={require('../../assets/down_arrow.png')}
         />
-      </View>
+      </Pressable>
       <View style={styles.notificationBellContainer}>
         <Image
           style={styles.notificationBell}
@@ -45,13 +57,21 @@ const Header = () => {
 };
 
 const WalletSelector = () => {
+  const walletSelection = useSelector(
+    (state: ReduxInterface) => state.wallets.selection,
+  );
   return (
     <View style={styles.walletSelectorOuterContainer}>
       <Image
         style={styles.martian_logo}
         source={require('../../assets/martian_logo_black_small.png')}
       />
-      <View style={styles.walletSelectorInnerContainer}>
+      <Pressable
+        style={styles.walletSelectorInnerContainer}
+        onPress={() =>
+          PushScreenAction({route: Routes.WalletSelectorDialog, params: {}})
+        }
+      >
         <View style={styles.walletSelectorTitleContainer}>
           <Text style={styles.walletTitle}>Martian.apt</Text>
           <Image
@@ -60,13 +80,13 @@ const WalletSelector = () => {
           />
         </View>
         <View style={styles.walletSelectorAddressContainer}>
-          <Text style={styles.walletAddress}>0x6e....2ED0E</Text>
+          <Text style={styles.walletAddress}>{walletSelection.address}</Text>
           <Image
             style={styles.addressCopy}
             source={require('../../assets/copy.png')}
           />
         </View>
-      </View>
+      </Pressable>
     </View>
   );
 };

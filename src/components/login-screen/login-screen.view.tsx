@@ -34,11 +34,13 @@ export const LoginScreenView: FC<Props<LoginScreenParams>> = ({}) => {
               params: {},
             });
           }}
-          style={styles.unlockButton}>
+          style={styles.unlockButton}
+        >
           <Text style={styles.unlockButtonText}>UNLOCK</Text>
         </Pressable>
       </View>
       <Text />
+      <Text style={styles.forgotPasswordText}>FORGOT PASSWORD</Text>
     </SafeAreaView>
   );
 };
